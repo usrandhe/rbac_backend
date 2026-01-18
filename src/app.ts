@@ -8,6 +8,8 @@ import { errorHandler, notFoundHandler } from './middlewares/errorHandlers';
 
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
+import roleRoutes from './routes/role.routes';
+import permissionRoutes from './routes/permission.routes';
 
 const app: Application = express();
 
@@ -54,12 +56,16 @@ app.get(`/api/${API_VERSION}`, (req, res) => {
         endpoints: {
             auth: `/api/${API_VERSION}/auth`,
             users: `/api/${API_VERSION}/users`,
+            roles: `/api/${API_VERSION}/roles`,
+            permissions: `/api/${API_VERSION}/permissions`,
         },
     });
 });
 
 app.use(`/api/${API_VERSION}/auth`, authRoutes);
 app.use(`/api/${API_VERSION}/users`, userRoutes);
+app.use(`/api/${API_VERSION}/roles`, roleRoutes);
+app.use(`/api/${API_VERSION}/permissions`, permissionRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
