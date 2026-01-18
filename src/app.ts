@@ -6,6 +6,8 @@ import compression from 'compression';
 import morgan from 'morgan';
 import {errorHandler, notFoundHandler} from './middlewares/errorHandlers';
 
+import authRoutes from './routes/auth.routes';
+
 const app: Application = express();
 
 app.use(helmet());
@@ -50,6 +52,8 @@ app.get(`/api/${API_VERSION}`, (req, res) => {
         timestamp: new Date().toISOString()
      });
 });
+
+app.use(`/api/${API_VERSION}/auth`, authRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
