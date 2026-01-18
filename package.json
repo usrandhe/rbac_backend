@@ -5,14 +5,17 @@
   "main": "server.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec tsx server.ts",
+    "dev": "nodemon --exec tsx src/server.ts",
     "build": "tsc",
     "start": "node dist/server.ts",
-    "db:seed": "prisma db seed",
+    "db:seed": "tsx prisma/seed.ts",
     "db:generate": "prisma generate",
     "db:studio": "prisma studio",
-    "db:migrate": "prisma migrate dev --name init",
-    "prisma:generate": "prisma generate"
+    "db:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "db:reset": "prisma migrate reset && npm run db:seed",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "keywords": [],
   "author": "",
@@ -35,9 +38,11 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/compression": "^1.8.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^25.0.9",
     "@types/pg": "^8.16.0",
     "nodemon": "^3.1.11",
