@@ -2,10 +2,10 @@ import * as bcrypt from 'bcryptjs';
 import prisma from './../src/lib/prisma';
 
 async function main() {
-  console.log('🌱 Starting database seeding...');
+  console.log('Starting database seeding...');
 
   // 1. Create Roles
-  console.log('📝 Creating roles...');
+  console.log('Creating roles...');
   
   const superAdminRole = await prisma.role.upsert({
     where: { name: 'super_admin' },
@@ -43,10 +43,10 @@ async function main() {
     },
   });
 
-  console.log('✅ Roles created');
+  console.log('Roles created');
 
   // 2. Create Permissions
-  console.log('📝 Creating permissions...');
+  console.log('Creating permissions...');
 
   const resources = ['users', 'roles', 'permissions'];
   const actions = ['create', 'read', 'update', 'delete'];
@@ -69,10 +69,10 @@ async function main() {
     }
   }
 
-  console.log(`✅ ${permissions.length} permissions created`);
+  console.log(`${permissions.length} permissions created`);
 
   // 3. Assign Permissions to Roles
-  console.log('📝 Assigning permissions to roles...');
+  console.log('Assigning permissions to roles...');
 
   // Super Admin gets ALL permissions
   const allPermissions = await prisma.permission.findMany();
@@ -156,10 +156,10 @@ async function main() {
     });
   }
 
-  console.log('✅ Permissions assigned to roles');
+  console.log('Permissions assigned to roles');
 
   // 4. Create Super Admin User
-  console.log('📝 Creating super admin user...');
+  console.log('Creating super admin user...');
 
   const hashedPassword = await bcrypt.hash('SuperAdmin@123', 10);
 
@@ -192,10 +192,10 @@ async function main() {
     },
   });
 
-  console.log('✅ Super admin user created');
+  console.log('Super admin user created');
 
   // 5. Create Sample Users for Testing
-  console.log('📝 Creating sample users...');
+  console.log('Creating sample users...');
 
   // Admin User
   const adminUser = await prisma.user.upsert({
@@ -284,17 +284,17 @@ async function main() {
     },
   });
 
-  console.log('✅ Sample users created');
+  console.log('Sample users created');
 
   // Summary
-  console.log('\n🎉 Seeding completed successfully!\n');
-  console.log('📊 Summary:');
+  console.log('\n Seeding completed successfully!\n');
+  console.log('Summary:');
   console.log('─────────────────────────────────');
   console.log(`✓ Roles: 4 (super_admin, admin, manager, user)`);
   console.log(`✓ Permissions: ${permissions.length}`);
   console.log(`✓ Users: 4`);
   console.log('─────────────────────────────────');
-  console.log('\n🔐 Test Credentials:');
+  console.log('\n Test Credentials:');
   console.log('─────────────────────────────────');
   console.log('Super Admin:');
   console.log('  Email: superadmin@rbac.com');
@@ -313,7 +313,7 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error('❌ Error during seeding:', e);
+    console.error('Error during seeding:', e);
     process.exit(1);
   })
   .finally(async () => {

@@ -14,10 +14,10 @@ const startServer = async () => {
 
         const server = app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
-            console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
-            console.log(`🔗 URL: http://localhost:${PORT}`);
-            console.log(`🏥 Health: http://localhost:${PORT}/health`);
-            console.log(`📡 API: http://localhost:${PORT}/api/${process.env.API_VERSION || 'v1'}`);
+            console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+            console.log(`URL: http://localhost:${PORT}`);
+            console.log(`Health: http://localhost:${PORT}/health`);
+            console.log(`API: http://localhost:${PORT}/api/${process.env.API_VERSION || 'v1'}`);
         });
 
         // polite shoutDown
