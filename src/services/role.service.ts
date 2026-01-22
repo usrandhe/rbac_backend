@@ -42,6 +42,7 @@ export class RoleService {
         _count: {
           select: {
             userRoles: true,
+            rolePermissions: true
           },
         },
       },
@@ -62,6 +63,7 @@ export class RoleService {
         description: rp.permission.description,
       })),
       userCount: role._count.userRoles,
+      permissionCount: role._count.rolePermissions,
     }));
 
     return PaginationUtils.createPaginatedResponse(
